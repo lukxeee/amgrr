@@ -1,0 +1,1120 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AMAGIRI</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    // CONFIGURATION AND DATA CONSTANTS
+    const APP_CONFIG = {
+      splashImgSrc: 'https://media.discordapp.net/attachments/1457050948340944946/1506303375979843765/standard_3.gif?ex=6a111196&is=6a0fc016&hm=fee1bca56219cdfe2e04fdae5b4c34cf1d8dc020acf69154d643d05b24b12a6d&=&width=688&height=243',
+      customBackgroundImg: 'https://media.discordapp.net/attachments/1457050948340944946/1502663098442453266/copy_861291D2-E130-4406-8CDD-34027641F62D.gif?ex=6a11ab10&is=6a105990&hm=aa02b2cdfa4479c67e430369cacf958849f813ca2620c007e9ffa4ba740afa48&=&width=533&height=300',
+      bgMusicUrl: 'https://videotourl.com/audio/1779460026946-a35d1c93-f5a9-4b89-98bc-88ba40977e25.mp3' 
+    };
+
+    const THREAT_ITEMS = [
+      { id: 't1', title: 'DAMISH', subtitle: 'OLD GODS', bannerImg: 'https://images-ext-1.discordapp.net/external/oLVKUgvW7W4eZ4YFPmaJehr0XpX6ys0EC39q_IDLpGA/%3Fsize%3D4096%26ignore%3Dtrue%29./https/cdn.discordapp.com/avatars/777575122592727081/8f70f71e0ad47891f9421963795de624.png?format=webp&quality=lossless&width=320&height=320', soundSrc: 'https://www.image2url.com/r2/default/files/1779008778166-6622b4d5-9d78-414f-b2b4-89d6d79e1838.mp3' },
+      { id: 't2', title: 'LUKE', subtitle: 'OLD GODS', bannerImg: 'https://images-ext-1.discordapp.net/external/tDefOvtYdAr8NljXiW1IfP9kY6xlGuFXz3dsw8HqwHA/%3Fsize%3D4096%26ignore%3Dtrue%29./https/cdn.discordapp.com/avatars/1389243158696820867/f2fd5824a87200714ab3d00b1998aef3.png?format=webp&quality=lossless&width=320&height=320', soundSrc: 'https://www.image2url.com/r2/default/files/1779008778166-6622b4d5-9d78-414f-b2b4-89d6d79e1838.mp3' },
+      { id: 't3', title: 'ASTRA', subtitle: 'OLD GODS', bannerImg: 'https://images-ext-1.discordapp.net/external/_ciowNsvs02i66x0sqrDDBQs4ahip7ZOZebEwnHv7pc/%3Fsize%3D4096%26ignore%3Dtrue%29./https/cdn.discordapp.com/avatars/1299747515574386692/c0452bb9d1cc6b91b892a8a0739a393b.png?format=webp&quality=lossless&width=320&height=320', soundSrc: 'https://www.image2url.com/r2/default/files/1779008778166-6622b4d5-9d78-414f-b2b4-89d6d79e1838.mp3' },
+      { id: 't4', title: 'SANZU', subtitle: 'OLD GODS', bannerImg: 'https://media.discordapp.net/attachments/1456934285129814166/1507373810725158922/Money_Penne.jpg?ex=6a11aac2&is=6a105942&hm=c6d49278132b3fbef40f543938d889adf08d0938d69f87f498913a3a675db7d1&=&format=webp&width=320&height=320', soundSrc: 'https://www.image2url.com/r2/default/files/1779008778166-6622b4d5-9d78-414f-b2b4-89d6d79e1838.mp3' },
+      { id: 't5', title: 'RHYA', subtitle: 'OLD GODS', bannerImg: 'https://images-ext-1.discordapp.net/external/eDN3iCTxrcYTnXLbT1SHPmEsF6tvzq09c_zOzJWCM-I/%3Fsize%3D4096%26ignore%3Dtrue%29./https/cdn.discordapp.com/avatars/832226546491195462/5e57b2802b86753fa80830adf4af4e29.png?format=webp&quality=lossless&width=320&height=320', soundSrc: 'https://www.image2url.com/r2/default/files/1779008778166-6622b4d5-9d78-414f-b2b4-89d6d79e1838.mp3' },
+      { id: 't6', title: 'CHASE', subtitle: 'OLD GODS', bannerImg: 'https://media.discordapp.net/attachments/1456934285129814166/1507373809387180102/87bc09ab-341d-4f64-a09f-061f5bb512a4.jpg?ex=6a11aac1&is=6a105941&hm=882da6c674311af04686a33ed1bcf20e0aeff19be47c69e834be4727dc42b397&=&format=webp&width=800&height=800', soundSrc: 'https://www.image2url.com/r2/default/files/1779008778166-6622b4d5-9d78-414f-b2b4-89d6d79e1838.mp3' }
+    ];
+
+    const EXECUTIVE_ITEMS = [
+      { id: 'm1', title: 'MICA', subtitle: 'DOA', bannerImg: 'https://images-ext-1.discordapp.net/external/b9vaT_t-tNezW9mvYOpdhCx7a2QUzGc9Vi-PfEVR9fI/%3Fsize%3D4096%26ignore%3Dtrue%29./https/cdn.discordapp.com/avatars/1073424208551477349/0fc0d4b2239b2eab3a81456c6e9fbd95.png?format=webp&quality=lossless&width=320&height=320', soundSrc: 'https://www.image2url.com/r2/default/files/1779008778166-6622b4d5-9d78-414f-b2b4-89d6d79e1838.mp3' },
+      { id: 'm2', title: 'PAO', subtitle: 'DOA', bannerImg: 'https://images-ext-1.discordapp.net/external/gFL2EjoUCvbBsRddAozNddVW4sZ0UHL2u-2l5tOVBpk/%3Fsize%3D4096%26ignore%3Dtrue%29./https/cdn.discordapp.com/avatars/1357276652354273350/b01c2fc3b731680e9a8322e179a1fa94.png?format=webp&quality=lossless&width=720&height=720', soundSrc: 'https://www.image2url.com/r2/default/files/1779008778166-6622b4d5-9d78-414f-b2b4-89d6d79e1838.mp3' },   
+      { id: 'm2', title: 'KASH', subtitle: 'DOA', bannerImg: 'https://images-ext-1.discordapp.net/external/j4MsGqR_WBNR760cIKY3lYD7uhXTqCGIKG_Dsu9_0D4/%3Fsize%3D4096%26ignore%3Dtrue%29./https/cdn.discordapp.com/avatars/1098937185882869840/02aaaa55cc52190ca4730385389c5312.png?format=webp&quality=lossless&width=320&height=320', soundSrc: 'https://www.image2url.com/r2/default/files/1779008778166-6622b4d5-9d78-414f-b2b4-89d6d79e1838.mp3' },
+    ];
+
+    const EXCLUSIVE_DATA = [
+      { id: 'mem1', name: 'SAKAE', role: 'XCLU', avatar: 'https://images-ext-1.discordapp.net/external/I-D-A8x3kRkl-rWjQxFvapIUHMOrFbaT3EWn7NN9Ecg/%3Fsize%3D4096%26ignore%3Dtrue%29./https/cdn.discordapp.com/avatars/908895690971807825/f462acdd78fde44777bb50740b1a16a8.png?format=webp&quality=lossless&width=320&height=320', soundSrc: 'https://www.image2url.com/r2/default/files/1779008845662-e4240e35-e807-4733-b441-5048d5e2405b.mp3' },
+      { id: 'mem2', name: 'CIYA', role: 'XLCU', avatar: 'https://images-ext-1.discordapp.net/external/FLwqzmLcwBo1ydPaXg8zc2mqWISt1oHENsBl8hbzv-I/%3Fsize%3D4096%26ignore%3Dtrue%29./https/cdn.discordapp.com/avatars/1501655499332911197/c3a7fbe592811807c35886359f9aabf8.png?format=webp&quality=lossless&width=320&height=320', soundSrc: 'https://www.image2url.com/r2/default/files/1779008845662-e4240e35-e807-4733-b441-5048d5e2405b.mp3' },
+      { id: 'mem3', name: 'SOJU', role: 'XLCU', avatar: 'https://images-ext-1.discordapp.net/external/Yrq_tI08cVZxiqKYKbo-sM9e2dMRl6pqFdfaNM1BCjk/%3Fsize%3D4096%26ignore%3Dtrue%29./https/cdn.discordapp.com/avatars/809350900438401040/73503889e8086cdda8ad04af2c599b33.png?format=webp&quality=lossless&width=320&height=320', soundSrc:'https://www.image2url.com/r2/default/files/1779008845662-e4240e35-e807-4733-b441-5048d5e2405b.mp3'},
+      { id: 'mem4', name: 'YATO', role: 'XLCU', avatar: 'https://images-ext-1.discordapp.net/external/COu82NKOz9O8ZY7xVnRUzJWodU0AyhxPhn9d_sbcssQ/%3Fsize%3D4096%26ignore%3Dtrue%29./https/cdn.discordapp.com/guilds/1282390073295245465/users/842030893651460098/avatars/e1972f837a881cc3a3c8e4d3366a8d8a.png?format=webp&quality=lossless&width=320&height=320', soundSrc: 'https://www.image2url.com/r2/default/files/1779008845662-e4240e35-e807-4733-b441-5048d5e2405b.mp3' }
+    ];
+
+    // Tailwind Configuration
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            accent: '#ff0000',
+            pink: '#ec4899',
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            mono: ['Courier New', 'Courier', 'monospace'],
+            display: ['Impact', 'Arial Black', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Splash Screen Transitions */
+    .splash-exit {
+      opacity: 0 !important;
+      transform: scale(1.1) !important;
+      pointer-events: none;
+    }
+    
+    .fade-in-on-enter {
+      opacity: 0;
+      transition: opacity 1s ease-out;
+    }
+    .fade-in-on-enter.active {
+      opacity: 1;
+    }
+
+    /* Scanline Animation Effects */
+    @keyframes scanline {
+      0% { transform: translateY(-100%); }
+      100% { transform: translateY(100vh); }
+    }
+    .animate-scanline { animation: scanline 4s linear infinite; }
+
+    @keyframes pulse-custom {
+      0%, 100% { opacity: 1; }
+      50% { opacity: .5; }
+    }
+    .animate-pulse-custom { animation: pulse-custom 2s infinite; }
+
+    /* Frosted Glass Base */
+    .glass {
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    
+    body.no-scroll { overflow: hidden; }
+  
+/* PROFILE MODAL */
+.profile-modal{
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.85);
+backdrop-filter:blur(6px);
+z-index:9999;
+animation:fadeIn .3s;
+}
+
+.profile-modal.active{
+display:flex;
+justify-content:center;
+align-items:center;
+}
+
+.profile-box{
+background:#111;
+border:1px solid rgba(255,255,255,0.1);
+width:90%;
+max-width:420px;
+border-radius:20px;
+overflow:hidden;
+animation:zoomIn .3s;
+box-shadow:0 0 40px rgba(255,0,0,0.2);
+}
+
+.profile-banner{
+height:140px;
+background-size:cover;
+background-position:center;
+}
+
+.profile-content{
+padding:25px;
+text-align:center;
+}
+
+.profile-avatar{
+width:100px;
+height:100px;
+border-radius:50%;
+border:4px solid white;
+margin-top:-70px;
+object-fit:cover;
+background:#000;
+}
+
+.profile-name{
+font-size:28px;
+font-weight:700;
+margin-top:10px;
+}
+
+.profile-role{
+color:#ff3e3e;
+font-size:14px;
+letter-spacing:2px;
+margin-bottom:15px;
+text-transform:uppercase;
+}
+
+.close-modal{
+position:absolute;
+top:20px;
+right:25px;
+font-size:35px;
+cursor:pointer;
+color:white;
+}
+
+.card{
+cursor:pointer;
+}
+
+@keyframes zoomIn{
+from{transform:scale(.7);opacity:0;}
+to{transform:scale(1);opacity:1;}
+}
+
+@keyframes fadeIn{
+from{opacity:0;}
+to{opacity:1;}
+}
+
+</style>
+</head>
+<body class="bg-black text-white font-sans selection:bg-accent selection:text-white relative no-scroll">
+
+  <!-- 1. SPLASH SCREEN LAYER -->
+  <div id="splash-screen" class="fixed inset-0 z-[100] bg-black flex flex-col justify-center items-center overflow-hidden cursor-pointer transition-all duration-1000">
+    <div class="absolute inset-0 z-0 opacity-40 pointer-events-none">
+      <div class="absolute inset-0 bg-[linear-gradient(to_right,#ff000012_1px,transparent_1px),linear-gradient(to_bottom,#ff000012_1px,transparent_1px)] bg-[size:40px_40px]"></div>
+      <div class="absolute inset-0 bg-gradient-to-t from-black via-red-950/5 to-black"></div>
+    </div>
+
+    <div id="splash-content" class="relative z-10 flex flex-col items-center max-w-md w-full px-8 transition-transform duration-1000">
+      <!-- Generated Dynamically by script -->
+    </div>
+
+    <!-- UI Metadata details -->
+    <div class="absolute bottom-12 left-12 font-mono text-[10px] text-white/10 uppercase space-y-2 hidden md:block">
+      <div>[ STATUS: SYNDICATE_READY ]</div>
+      <div>[ AUTH: ADMIN_LEVEL_4 ]</div>
+      <div>[ NETWORK: ENCRYPTED_MESH ]</div>
+    </div>
+    <div class="absolute bottom-12 right-12 font-mono text-[10px] text-white/10 uppercase hidden md:block">
+      V.0.4.2 // AMAGIRI_OS
+    </div>
+
+    <div class="absolute inset-0 pointer-events-none overflow-hidden opacity-5">
+      <div class="w-full h-[1px] bg-accent animate-scanline"></div>
+    </div>
+  </div>
+
+  <!-- 2. MAIN APPLICATION LAYER -->
+  <div id="main-content" class="fade-in-on-enter hidden relative min-h-screen">
+    
+    <!-- Ambient Background Media and Blending Filters -->
+    <div id="global-bg" class="fixed inset-0 z-[-1] pointer-events-none opacity-100 bg-cover bg-center bg-fixed transition-all duration-700"></div>
+    <div class="fixed inset-0 z-[-1] pointer-events-none bg-gradient-to-r from-accent/40 via-black/60 to-black/90 mix-blend-multiply"></div>
+    <div class="fixed inset-0 z-[-1] pointer-events-none bg-gradient-to-r from-accent/10 to-transparent opacity-50"></div>
+
+    <!-- MAIN INTERFACE HEADER -->
+    <nav class="fixed top-0 inset-x-0 z-50 glass border-b border-white/5 px-6 py-4 flex items-center justify-between">
+      <div class="font-display font-black text-xl tracking-tighter uppercase">AMA<span class="text-accent">GIRI</span></div>
+      <div class="hidden md:flex items-center gap-8 font-mono text-xs tracking-widest uppercase text-white/60">
+        <a href="#hof" class="hover:text-white transition-colors">AMAGIRI</a>
+        <a href="#threat" class="hover:text-white transition-colors">HALL OF FAME</a>
+        <a href="#menace" class="hover:text-white transition-colors">DOA</a>
+        <a href="#members" class="hover:text-white transition-colors">EXCLUSIVE</a>
+        <a href="#about" class="hover:text-white transition-colors">ABOUT US</a>
+      </div>
+    </nav>
+
+    <!-- MEDIA VOLUME TOGGLE CONTROLLER -->
+    <div class="fixed bottom-8 right-8 z-[60]">
+      <button id="mute-toggle" class="w-12 h-12 glass rounded-full flex items-center justify-center text-white border border-white/10 hover:border-accent hover:shadow-[0_0_15px_rgba(255,0,0,0.3)] transition-all">
+        <i data-lucide="volume-2" class="w-5 h-5"></i>
+      </button>
+    </div>
+
+    <!-- HERO PROFILE DISPLAY SECTION -->
+    <section id="hof" class="relative min-h-screen flex flex-col items-center justify-center pt-20 overflow-hidden bg-transparent">
+      <div class="absolute inset-0 bg-gradient-to-r from-accent/20 via-transparent to-transparent opacity-60 pointer-events-none"></div>
+      <div class="absolute inset-x-0 top-0 h-[70vh] bg-gradient-to-b from-black via-transparent to-transparent opacity-80 pointer-events-none"></div>
+      
+      <div class="relative z-10 max-w-7xl mx-auto px-6 text-center">
+        <div class="mb-8">
+          <h1 class="text-7xl sm:text-9xl md:text-[12rem] font-display font-black leading-[0.8] tracking-tighter uppercase text-white drop-shadow-2xl">
+            AMA<span class="text-accent">GIRI</span>
+          </h1>
+        </div>
+        <p class="max-w-2xl mx-auto text-lg sm:text-2xl text-neutral-400 font-medium leading-relaxed tracking-tight mb-12">
+          We are amagiri, we keep our circle clean and no switching side our connections stronger than blood. ALL HAIL AMAGIRI.
+        </p>
+      </div>
+
+      <div class="absolute bottom-12 flex flex-col items-center gap-4 group">
+        <a href="#kupal" class="flex flex-col items-center gap-2 group">
+          <span class="text-[10px] font-bold tracking-[0.5em] text-white/40 uppercase group-hover:text-accent transition-colors">SCROLL</span>
+          <i data-lucide="chevron-down" class="w-8 h-8 text-white/20 group-hover:text-accent group-hover:translate-y-1 transition-all animate-bounce" stroke-width="1"></i>
+        </a>
+      </div>
+
+      <div class="absolute bottom-10 left-10 hidden xl:block opacity-50 animate-pulse">
+        <div class="text-[10px] font-mono text-white/20 uppercase tracking-[1em]" style="writing-mode: vertical-rl;">SYSTEM_STABLE</div>
+      </div>
+    </section>
+
+    <!-- CALL-TO-ACTION SYSTEM LINK -->
+    <section id="kupal" class="bg-black/60 backdrop-blur-md py-32 flex items-center justify-center border-t border-white/5">
+      <div id="kupal-interaction" class="cursor-pointer group relative">
+        <h2 class="text-5xl md:text-8xl font-display font-black text-white text-center uppercase tracking-tighter px-6 leading-none transition-transform group-hover:scale-105 duration-500">
+          AMAGIRI IS HERE <br />
+          <span class="text-accent">LIVE, LAUGH, LOVE AMAGIRI</span>
+        </h2>
+        <div class="absolute -bottom-10 left-1/2 -translate-x-1/2 w-24 h-[1px] bg-gradient-to-r from-transparent via-accent/20 to-transparent group-hover:via-accent transition-all"></div>
+      </div>
+    </section>
+
+    <!-- THREAT SYNDICATE SHOWCASE -->
+    <section id="threat" class="bg-black/60 backdrop-blur-md py-24 px-6 border-t border-white/5">
+      <div class="max-w-7xl mx-auto">
+        <h2 class="text-xs font-mono font-bold tracking-[0.4em] uppercase text-white/40 mb-12 flex items-center gap-3">
+          <span class="w-2 h-2 bg-accent inline-block"></span> HALL OF FAME
+        </h2>
+        <div id="threat-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+          <!-- Dynamically Generated -->
+        </div>
+      </div>
+    </section>
+
+    <!-- EXECUTIVE LEADERSHIP MODULE -->
+    <section id="menace" class="py-24 px-6 border-t border-white/5">
+      <div class="max-w-full mx-auto px-4">
+        <h2 class="text-xs font-mono font-bold tracking-[0.4em] uppercase text-white/40 mb-12 flex items-center gap-3">
+          <span class="w-2 h-2 bg-accent inline-block"></span> DOA
+        </h2>
+        <div id="menace-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-12">
+          <!-- Dynamically Generated -->
+        </div>
+      </div>
+    </section>
+
+    <!-- EXCLUSIVE ELITE MEMBERSHIP -->
+    <section id="members" class="bg-black/60 backdrop-blur-md py-24 px-6 border-t border-white/5">
+      <div class="max-w-7xl mx-auto">
+        <h2 class="text-xs font-mono font-bold tracking-[0.4em] uppercase text-white/40 mb-12 flex items-center gap-3">
+          <span class="w-2 h-2 bg-accent inline-block"></span> EXCLUSIVE
+        </h2>
+        <div id="members-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+          <!-- Dynamically Generated -->
+        </div>
+      </div>
+    </section>
+
+    <!-- PHILOSOPHY STATEMENT -->
+    <section id="about" class="bg-black/60 backdrop-blur-md py-32 px-6 border-t border-white/5">
+      <div class="max-w-4xl mx-auto">
+        <p class="text-2xl sm:text-4xl text-white font-medium leading-tight tracking-tight text-center">
+          We are amagiri, we keep our circle clean and no switching side our connections stronger than blood. ALL HAIL AMAGIRI
+        </p>
+      </div>
+    </section>
+
+    <!-- INTERFACE FOOTER -->
+    <footer class="py-20 bg-black/80 backdrop-blur-md border-t border-white/5 text-center text-white/30 font-mono text-xs uppercase tracking-[0.5em] px-6">
+      <div class="flex items-center justify-center gap-8 mb-12 opacity-50">
+        <a href="#" class="hover:text-accent transition-colors">DISCORD</a>
+        <a href="#" class="hover:text-accent transition-colors">X / TWITTER</a>
+        <a href="#" class="hover:text-accent transition-colors">OPENSEA</a>
+      </div>
+      <div>© 2026 AMAGIRI COLLECTIVE // ALL RIGHTS RESERVED</div>
+    </footer>
+
+  </div>
+
+  <!-- NATIVE AUDIO REPLICATORS -->
+  <audio id="main-audio" loop></audio>
+  <audio id="sfx-audio" src="https://videotourl.com/audio/1779460026946-a35d1c93-f5a9-4b89-98bc-88ba40977e25.mp3"></audio>
+
+  <!-- CONTROL LAYER FUNCTIONALITY -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // Setup icons
+      lucide.createIcons();
+
+      const mainAudio = document.getElementById('main-audio');
+      const sfxAudio = document.getElementById('sfx-audio');
+      const muteToggleBtn = document.getElementById('mute-toggle');
+      
+      if(APP_CONFIG.bgMusicUrl) mainAudio.src = APP_CONFIG.bgMusicUrl;
+      if(APP_CONFIG.customBackgroundImg) {
+        document.getElementById('global-bg').style.backgroundImage = `url(${APP_CONFIG.customBackgroundImg})`;
+      }
+
+      let isMuted = false;
+
+      function stopAllSounds(){
+
+    sfxAudio.pause();
+    sfxAudio.currentTime = 0;
+
+    document.querySelectorAll('.audio-player').forEach(audio => {
+        audio.pause();
+        audio.currentTime = 0;
+    });
+
+}
+
+      // Handle card selection sound effects and main track volume dip
+      const playInteractionSound = (customSound) => {
+
+      sfxAudio.pause();
+      sfxAudio.currentTime = 0;
+
+      if (!isMuted) {
+        mainAudio.volume = 0.1;
+    }
+
+    if (customSound) sfxAudio.src = customSound;
+
+    sfxAudio.play().catch(e => console.warn("SFX failed:", e));
+
+    setTimeout(() => {
+        if (!isMuted) mainAudio.volume = 1.0;
+    }, 1500);
+};
+
+      // Splash Setup Block
+      const splashScreen = document.getElementById('splash-screen');
+      const splashContent = document.getElementById('splash-content');
+
+      if (APP_CONFIG.splashImgSrc) {
+        splashContent.innerHTML = `
+          <div class="w-full relative group">
+            <div class="absolute inset-0 bg-accent/10 blur-3xl rounded-full scale-110 opacity-0 group-hover:opacity-100 transition-opacity duration-1000"></div>
+            <img src="${APP_CONFIG.splashImgSrc}" alt="System Logo" class="w-full h-auto object-contain relative z-10 drop-shadow-[0_10px_30px_rgba(255,0,0,0.1)] group-hover:drop-shadow-[0_15px_40px_rgba(255,0,0,0.2)] transition-all duration-500 animate-pulse-custom" referrerpolicy="no-referrer" />
+            <div class="mt-8 text-center">
+              <span class="text-[10px] font-mono tracking-[0.5em] text-white/20 uppercase group-hover:text-accent transition-colors duration-500">CLICK TO INITIATE SYSTEM LINK</span>
+            </div>
+          </div>`;
+      } else {
+        splashContent.innerHTML = `
+          <div class="w-24 h-24 bg-accent rounded-2xl flex items-center justify-center text-4xl font-black transform -skew-x-12 mb-8 shadow-[0_10px_30px_rgba(0,51,255,0.2)]">
+            <span class="text-white">GJ</span>
+          </div>
+          <h1 class="text-4xl md:text-6xl font-display font-black tracking-tighter uppercase text-white mb-4">SYSTEM INITIATED</h1>
+          <p class="text-neutral-400 font-mono text-xs tracking-[0.4em] uppercase mb-12">Decrypting Core...</p>
+          <button class="group relative px-12 py-5 overflow-hidden rounded-full border border-white/10 transition-all hover:border-pink">
+            <div class="absolute inset-0 bg-pink translate-y-full group-hover:translate-y-0 transition-transform duration-500"></div>
+            <span class="relative z-10 font-display font-black text-sm tracking-[0.5em] uppercase text-white group-hover:text-white">CLICK TO ENTER</span>
+          </button>`;
+      }
+
+      // Initializing system link click handler
+      splashScreen.addEventListener('click', () => {
+        splashScreen.classList.add('splash-exit');
+        document.body.classList.remove('no-scroll');
+        
+        const mainContent = document.getElementById('main-content');
+        mainContent.classList.remove('hidden');
+        setTimeout(() => mainContent.classList.add('active'), 50);
+
+        mainAudio.play().catch(e => console.warn("Audio Context setup skipped until manual interface gesture occurs:", e));
+        
+        setTimeout(() => splashScreen.remove(), 1000);
+      });
+
+      // Volume controllers
+      muteToggleBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        isMuted = !isMuted;
+        mainAudio.muted = isMuted;
+        
+        if(isMuted) {
+          muteToggleBtn.innerHTML = `<i data-lucide="volume-x" class="w-5 h-5"></i>`;
+        } else {
+          muteToggleBtn.innerHTML = `<i data-lucide="volume-2" class="w-5 h-5 animate-pulse"></i>`;
+        }
+        lucide.createIcons();
+      });
+
+      document.getElementById('kupal-interaction').addEventListener('click', () => playInteractionSound());
+
+      // Grid Component Generators
+      const threatGrid = document.getElementById('threat-grid');
+      threatGrid.innerHTML = THREAT_ITEMS.map(item => `
+        <div class="group relative overflow-hidden rounded-xl border border-white/5 bg-zinc-900/40 backdrop-blur-sm cursor-pointer transition-all duration-300 hover:border-accent/40 hover:shadow-[0_0_30px_rgba(255,0,0,0.1)]" onclick="window.playCardItem('${item.soundSrc}'); openDynamicProfile('${item.title}','${item.subtitle}','${item.bannerImg}','FOUNDING FATHERS')">
+          <div class="aspect-video w-full overflow-hidden relative">
+            <img src="${item.bannerImg}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="${item.title}" />
+            <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/20 to-transparent"></div>
+          </div>
+          <div class="p-6 relative z-10">
+            <span class="text-[9px] font-mono tracking-widest text-accent uppercase block mb-1">${item.subtitle}</span>
+            <h3 class="text-xl font-bold uppercase tracking-tight text-white group-hover:text-accent transition-colors">${item.title}</h3>
+          </div>
+        </div>
+      `).join('');
+
+      const menaceGrid = document.getElementById('menace-grid');
+      menaceGrid.innerHTML = EXECUTIVE_ITEMS.map(item => `
+        <div class="group relative overflow-hidden rounded-2xl border border-white/5 bg-zinc-900/20 cursor-pointer h-[320px] transition-all duration-500 hover:border-accent/30" onclick="window.playCardItem('${item.soundSrc}'); openDynamicProfile('${item.title}','${item.subtitle}','${item.bannerImg}','THREAT')">
+          <img src="${item.bannerImg}" class="absolute inset-0 w-full h-full object-cover opacity-60 transition-transform duration-1000 group-hover:scale-105" alt="${item.title}" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
+          <div class="absolute bottom-0 inset-x-0 p-10 z-10">
+            <span class="text-xs font-mono tracking-[0.3em] text-accent block mb-2 font-bold">${item.subtitle}</span>
+            <h3 class="text-3xl md:text-4xl font-display font-black uppercase text-white group-hover:text-accent transition-colors tracking-tight">${item.title}</h3>
+          </div>
+        </div>
+      `).join('');
+
+      const membersGrid = document.getElementById('members-grid');
+      membersGrid.innerHTML = EXCLUSIVE_DATA.map(member => `
+        <div class="glass border border-white/5 rounded-2xl p-8 flex flex-col items-center text-center cursor-pointer group transition-all duration-300 hover:border-accent/30 hover:bg-zinc-900/30" onclick="window.playCardItem('${member.soundSrc}'); openDynamicProfile('${member.name}','${member.role}','${member.avatar}','EXCLUSIVES')">
+          <div class="w-24 h-24 rounded-full overflow-hidden mb-6 p-1 bg-gradient-to-b from-white/10 to-transparent group-hover:from-accent/50 transition-all duration-500">
+            <img src="${member.avatar}" class="w-full h-full object-cover rounded-full filter grayscale group-hover:grayscale-0 transition-all duration-500" alt="${member.name}" />
+          </div>
+          <h3 class="text-xl font-mono font-bold uppercase tracking-wide text-white group-hover:text-accent transition-colors mb-1">${member.name}</h3>
+          <p class="text-xs font-mono tracking-widest text-neutral-500 uppercase">${member.role}</p>
+        </div>
+      `).join('');
+
+      // Dynamic scoping connection function for clicking cards
+      window.playCardItem = (sound) => {
+        playInteractionSound(sound);
+      };
+
+window.openDynamicProfile = (name, role, avatar, desc='AMAGIRI BABIES') => {
+document.getElementById('modalAvatar').src = avatar;
+document.getElementById('modalName').innerText = name;
+document.getElementById('modalRole').innerText = role;
+document.getElementById('modalDesc').innerText = desc;
+document.getElementById('modalID').innerText = '';
+document.getElementById('modalBanner').style.backgroundImage = `url(${avatar})`;
+document.getElementById('profileModal').classList.add('active');
+};
+
+    });
+  </script>
+
+<div id="profileModal" class="profile-modal">
+<div class="close-modal" onclick="closeProfile()">&times;</div>
+
+<div class="profile-box">
+<div class="profile-banner" id="modalBanner"></div>
+
+<div class="profile-content">
+<img id="modalAvatar" class="profile-avatar" src="">
+<h2 id="modalName" class="profile-name"></h2>
+<p id="modalRole" class="profile-role"></p>
+<p id="modalDesc"></p>
+<div id="modalID" class="discord-id" style="margin-top:15px;"></div>
+</div>
+</div>
+</div>
+
+<script>
+function openProfile(card){
+
+const avatar = card.querySelector('.avatar').src;
+const name = card.querySelector('.name').innerText;
+const role = card.querySelector('.badge').innerText;
+const desc = card.querySelector('.description').innerText;
+const discordId = card.querySelector('.discord-id').innerText;
+
+document.getElementById('modalAvatar').src = avatar;
+document.getElementById('modalName').innerText = name;
+document.getElementById('modalRole').innerText = role;
+document.getElementById('modalDesc').innerText = desc;
+document.getElementById('modalID').innerText = discordId;
+
+document.getElementById('modalBanner').style.backgroundImage =
+window.getComputedStyle(card.querySelector('.banner')).backgroundImage;
+
+document.getElementById('profileModal').classList.add('active');
+}
+
+function closeProfile(){
+document.getElementById('profileModal').classList.remove('active');
+}
+
+window.addEventListener('click', function(e){
+const modal = document.getElementById('profileModal');
+if(e.target === modal){
+closeProfile();
+}
+});
+</script>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        :root {
+            --bg-color: #0a0a0c;
+            --card-bg: rgba(167, 10, 10, 0.65);
+            --card-border: rgba(139, 99, 99, 0.08);
+            --text-main: #ffffff;
+            --text-muted: #a0a0ab;
+            --accent-AMAGIRI: #ff3e3e;
+            --accent-AMAGIRI: #4a0202;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            background-image: linear-gradient(rgba(10, 10, 12, 0.85), rgba(10, 10, 12, 0.85)), url('https://jolly-lime-mtrovsqdnn.edgeone.app/render2-ezgif.com-optimize-1.gif');
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: center;
+            color: var(--text-main);
+            min-height: 100vh;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .section-heading {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+            color: #fff;
+        }
+
+        .section-heading.danger {
+            color: var(--accent-AMAGIRI);
+            border-bottom-color: rgba(255, 62, 62, 0.2);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 24px;
+            margin-bottom: 60px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            overflow: hidden;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            transition: transform 0.2s ease, border-color 0.2s ease;
+            position: relative;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .banner {
+            width: 100%;
+            height: 100px;
+            background-size: cover;
+            background-position: center;
+            background-image: url('https://media.discordapp.net/attachments/1457050948340944946/1506507912271364236/37D788F6-9896-49D0-86E2-98DFA9536CAB.gif?ex=6a112753&is=6a0fd5d3&hm=beac545ce8aaad5a4c8c828293db47743907903043c1923ea1e40d0a7db2c23c&=&width=533&height=178');
+        }
+
+        .avatar-container {
+            position: relative;
+            width: 70px;
+            height: 70px;
+            margin: -35px 0 0 20px;
+        }
+
+        .avatar {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #dadae6;
+            background-color: #1a1a22;
+        }
+
+        .card-content {
+            padding: 16px 20px 20px 20px;
+        }
+
+        .name-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 4px;
+        }
+
+        .name {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .badge {
+            font-size: 0.65rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            padding: 3px 8px;
+            border-radius: 20px;
+            letter-spacing: 1px;
+        }
+
+        .badge.amagiri {
+            background: rgba(215, 212, 212, 0.15);
+            color: var(--accent-amagiri);
+            border: 1px solid rgba(12, 6, 6, 0.3);
+        }
+
+        .badge.amagiribabies {
+            background: rgba(226, 217, 217, 0.15);
+            color: var(--accent-amagiribabies);
+            border: 1px solid rgba(2, 2, 1, 0.3);
+        }
+
+        .description {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+            font-style: italic;
+        }
+
+        .audio-player {
+            width: 100%;
+            height: 30px;
+            outline: none;
+            border-radius: 4px;
+        }
+
+        .discord-id {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            font-family: monospace;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 4px 8px;
+            border-radius: 4px;
+            display: inline-block;
+            margin-top: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        @media (max-width: 600px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- MOST WELL KNOWN ON AMAGIRI SECTION -->
+        <div class="section-heading danger">Most Well Known On Amagiri</div>
+        <div class="grid">
+            <!-- LEV -->
+            <div class="card" onclick="openProfile(this)">
+                <div class="banner"></div>
+                <div class="avatar-container">
+                    <img class="avatar" src="https://images-ext-1.discordapp.net/external/aVledvtmtU2jkgwSBmZNwbCYVTvtjwbUi6z3-OpBRgc/%3Fsize%3D4096%26ignore%3Dtrue%29./https/cdn.discordapp.com/avatars/1203576805098000458/b7e459a3bbe7cbd2860f70cd785e81b5.png?format=webp&quality=lossless&width=320&height=320" alt="LEV">
+                </div>
+                <div class="card-content">
+                    <div class="name-row">
+                        <span class="name">LEV</span>
+                        <span class="badge amagiri">AMAGIRI</span>
+                    </div>
+                    <p class="description">may saltik to</p>
+                    <audio class="audio-player" controls src="https://www.image2url.com/r2/default/files/1779007047123-8e18f6a6-8943-4dce-8714-5313f813033e.mp3"></audio>
+                    <div class="discord-id">ID: 1203576805098000458</div>
+                </div>
+            </div>
+
+            <!-- PRIMO -->
+            <div class="card" onclick="openProfile(this)">
+                <div class="banner"></div>
+                <div class="avatar-container">
+                    <img class="avatar" src="https://images-ext-1.discordapp.net/external/5_pk7LGe4NNvLpiHkWpQajJ5iUIuSsXBUyTOAxOFaJ8/%3Fsize%3D4096%26ignore%3Dtrue%29./https/cdn.discordapp.com/avatars/950748726887084102/b9204a02b1c95800c56cb20b48a7c641.png?format=webp&quality=lossless&width=930&height=930" alt="PRIMO">
+                </div>
+                <div class="card-content">
+                    <div class="name-row">
+                        <span class="name">PRIMO</span>
+                        <span class="badge amagiri">AMAGIRI</span>
+                    </div>
+                    <p class="description">may saltik to</p>
+                    <audio class="audio-player" controls src="https://www.image2url.com/r2/default/files/1779007047123-8e18f6a6-8943-4dce-8714-5313f813033e.mp3"></audio>
+                    <div class="discord-id">ID: 950748726887084102</div>
+                </div>
+            </div>
+
+            <!-- ZIA -->
+            <div class="card" onclick="openProfile(this)">
+                <div class="banner"></div>
+                <div class="avatar-container">
+                    <img class="avatar" src="https://images-ext-1.discordapp.net/external/3p8T31OoH-eQv_mu4nCOQ0kO_ChxZ9-9_i4L8EE_XGo/%3Fsize%3D4096%26ignore%3Dtrue%29./https/cdn.discordapp.com/avatars/798883975413891102/e15aa74e605155092cd1283e75d25e22.png?format=webp&quality=lossless&width=320&height=320" alt="ZIA">
+                </div>
+                <div class="card-content">
+                    <div class="name-row">
+                        <span class="name">ZIA</span>
+                        <span class="badge amagiri">AMAGIRI</span>
+                    </div>
+                    <p class="description">may saltik to</p>
+                    <audio class="audio-player" controls src="https://www.image2url.com/r2/default/files/1779007047123-8e18f6a6-8943-4dce-8714-5313f813033e.mp3"></audio>
+                    <div class="discord-id">ID: 798883975413891102</div>
+                </div>
+            </div>
+
+            <!-- NHAE -->
+            <div class="card" onclick="openProfile(this)">
+                <div class="banner"></div>
+                <div class="avatar-container">
+                    <img class="avatar" src="https://images-ext-1.discordapp.net/external/dWtl5ahG384h2lNTFkltT0p6iaOSNYrNo6wf3ofNWcQ/%3Fsize%3D4096%26ignore%3Dtrue%29./https/cdn.discordapp.com/avatars/1312071293708927009/7b3ba452beefa8ceaeea6e9cd3e88daf.png?format=webp&quality=lossless&width=320&height=320" alt="NHAE">
+                </div>
+                <div class="card-content">
+                    <div class="name-row">
+                        <span class="name">NHAE</span>
+                        <span class="badge amagiri">AMAGIRI</span>
+                    </div>
+                    <p class="description">may saltik to</p>
+                    <audio class="audio-player" controls src="https://www.image2url.com/r2/default/files/1779007047123-8e18f6a6-8943-4dce-8714-5313f813033e.mp3"></audio>
+                    <div class="discord-id">ID: 1312071293708927009</div>
+                </div>
+            </div>
+
+            <!-- COSMO -->
+            <div class="card" onclick="openProfile(this)">
+                <div class="banner"></div>
+                <div class="avatar-container">
+                    <img class="avatar" src="https://media.discordapp.net/attachments/1456934285129814166/1507373810087755838/a1fff072-67e9-422c-935a-6b42a932706b.jpg?ex=6a11aac1&is=6a105941&hm=01e475332c9efbe755a843616996f3ded30ef5f220eaac2072f255b89001ff64&=&format=webp&width=625&height=625" alt="COSMO">
+                </div>
+                <div class="card-content">
+                    <div class="name-row">
+                        <span class="name">COSMO</span>
+                        <span class="badge amagiri">AMAGIRI</span>
+                    </div>
+                    <p class="description">may saltik to</p>
+                    <audio class="audio-player" controls src="https://www.image2url.com/r2/default/files/1779007047123-8e18f6a6-8943-4dce-8714-5313f813033e.mp3"></audio>
+                    <div class="discord-id">ID: 867733069628964876</div>
+                </div>
+            </div>
+
+            <!-- POCH -->
+            <div class="card" onclick="openProfile(this)">
+                <div class="banner"></div>
+                <div class="avatar-container">
+                    <img class="avatar" src="https://images-ext-1.discordapp.net/external/LCWmBEJSLHqsRk06by4iFh92znP8Gmgc_DVzkSm49i0/%3Fsize%3D4096%26ignore%3Dtrue%29./https/cdn.discordapp.com/avatars/761540584309391380/03b99d6a5d3bd2036ca94957724abc22.png?format=webp&quality=lossless&width=320&height=320" alt="POCH">
+                </div>
+                <div class="card-content">
+                    <div class="name-row">
+                        <span class="name">POCH</span>
+                        <span class="badge amagiri">AMAGIRI</span>
+                    </div>
+                    <p class="description">may saltik to</p>
+                    <audio class="audio-player" controls src="https://www.image2url.com/r2/default/files/1779007047123-8e18f6a6-8943-4dce-8714-5313f813033e.mp3"></audio>
+                    <div class="discord-id">ID: 761540584309391380</div>
+                </div>
+            </div>
+
+            <!-- KAZAKH -->
+            <div class="card" onclick="openProfile(this)">
+                <div class="banner"></div>
+                <div class="avatar-container">
+                    <img class="avatar" src="https://media.discordapp.net/attachments/1456934285129814166/1507373811560087874/57c0c903-f51d-465b-901d-8f89e627f3b7.jpg?ex=6a11aac2&is=6a105942&hm=31c50fda07a8ab6527a68b4f6e925a421701cfa1fcc14ec9bce31b8a1986e028&=&format=webp&width=800&height=800" alt="KAZAKH">
+                </div>
+                <div class="card-content">
+                    <div class="name-row">
+                        <span class="name">KAZAKH</span>
+                        <span class="badge amagiri">AMAGIRI</span>
+                    </div>
+                    <p class="description">may saltik to</p>
+                    <audio class="audio-player" controls src="https://www.image2url.com/r2/default/files/1779007047123-8e18f6a6-8943-4dce-8714-5313f813033e.mp3"></audio>
+                    <div class="discord-id">ID: 1361671821593677904</div>
+                </div>
+            </div>
+            
+            <!-- KYLE -->
+            <div class="card" onclick="openProfile(this)">
+                <div class="banner"></div>
+                <div class="avatar-container">
+                    <img class="avatar" src="https://images-ext-1.discordapp.net/external/QjFSqYj38-VpRvyxAHaI0KreGVhGvDpR1hXezXVFHaM/%3Fsize%3D4096%26ignore%3Dtrue%29./https/cdn.discordapp.com/avatars/1093946165017448549/30f70e23ad75ac40c4961612c9ffb305.png?format=webp&quality=lossless&width=320&height=320" alt="KYLE">
+                </div>
+                <div class="card-content">
+                    <div class="name-row">
+                        <span class="name">KYLE</span>
+                        <span class="badge amagiri">AMAGIRI</span>
+                    </div>
+                    <p class="description">may saltik to</p>
+                    <audio class="audio-player" controls src="https://www.image2url.com/r2/default/files/1779007047123-8e18f6a6-8943-4dce-8714-5313f813033e.mp3"></audio>
+                    <div class="discord-id">ID: 1093946165017448549</div>
+                </div>
+            </div>
+
+         <!-- KIOSHI -->
+            <div class="card" onclick="openProfile(this)">
+                <div class="banner"></div>
+                <div class="avatar-container">
+                    <img class="avatar" src="https://images-ext-1.discordapp.net/external/OAQ4yHIF0hoUYJDJ9lJHFXMmvSBCxUWXZox9IvQizRY/%3Fsize%3D4096%26ignore%3Dtrue%29./https/cdn.discordapp.com/avatars/1301121288986824789/320b9ec57c52c1b995ff40b3384ba50b.png?format=webp&quality=lossless&width=320&height=320" alt="KIOSHI">
+                </div>
+                <div class="card-content">
+                    <div class="name-row">
+                        <span class="name">KIOSHI</span>
+                        <span class="badge amagiri">AMAGIRI</span>
+                    </div>
+                    <p class="description">may saltik to</p>
+                    <audio class="audio-player" controls src="https://www.image2url.com/r2/default/files/1779007047123-8e18f6a6-8943-4dce-8714-5313f813033e.mp3"></audio>
+                    <div class="discord-id">ID: 1301121288986824789</div>
+                </div>
+            </div>
+
+         <!-- CLAR -->
+            <div class="card" onclick="openProfile(this)">
+                <div class="banner"></div>
+                <div class="avatar-container">
+                    <img class="avatar" src="https://images-ext-1.discordapp.net/external/Cp0LUAYQJA0tuOKIrprugSrIa5kk_FymGhYME7WKtEw/%3Fsize%3D4096%26ignore%3Dtrue%29./https/cdn.discordapp.com/avatars/909114266869694554/14c8714a79968875425e9d566de2f41d.png?format=webp&quality=lossless&width=320&height=320" alt="CLAR">
+                </div>
+                <div class="card-content">
+                    <div class="name-row">
+                        <span class="name">CLAR</span>
+                        <span class="badge amagiri">AMAGIRI</span>
+                    </div>
+                    <p class="description">may saltik to</p>
+                    <audio class="audio-player" controls src="https://www.image2url.com/r2/default/files/1779007047123-8e18f6a6-8943-4dce-8714-5313f813033e.mp3"></audio>
+                    <div class="discord-id">ID: 909114266869694554</div>
+                </div>
+            </div>
+
+         <!-- WYNAO -->
+            <div class="card" onclick="openProfile(this)">
+                <div class="banner"></div>
+                <div class="avatar-container">
+                    <img class="avatar" src="https://images-ext-1.discordapp.net/external/V3NJ9owME9ykQTaT4j9X5UJZW6AMkW-PeHODwqgRShU/%3Fsize%3D4096%26ignore%3Dtrue%29./https/cdn.discordapp.com/avatars/1191253549116563500/511abfdc4005bed10e5660db37b5dd03.png?format=webp&quality=lossless&width=320&height=320" alt="WYNAO">
+                </div>
+                <div class="card-content">
+                    <div class="name-row">
+                        <span class="name">WYNAO</span>
+                        <span class="badge amagiri">AMAGIRI</span>
+                    </div>
+                    <p class="description">may saltik to</p>
+                    <audio class="audio-player" controls src="https://www.image2url.com/r2/default/files/1779007047123-8e18f6a6-8943-4dce-8714-5313f813033e.mp3"></audio>
+                    <div class="discord-id">ID: 1191253549116563500</div>
+                </div>
+            </div>
+
+         <!-- CODY -->
+            <div class="card" onclick="openProfile(this)">
+                <div class="banner"></div>
+                <div class="avatar-container">
+                    <img class="avatar" src="https://images-ext-1.discordapp.net/external/PLi7f3CGKKIGBV7ZXuAAVwmhbhsHqXt_4guQp2j3QAo/%3Fsize%3D4096%26ignore%3Dtrue%29./https/cdn.discordapp.com/avatars/1215302892278251530/5f927d02eaec082d6b1fa307171a6284.png?format=webp&quality=lossless&width=930&height=930" alt="CODY">
+                </div>
+                <div class="card-content">
+                    <div class="name-row">
+                        <span class="name">CODY</span>
+                        <span class="badge amagiri">AMAGIRI</span>
+                    </div>
+                    <p class="description">may saltik to</p>
+                    <audio class="audio-player" controls src="https://www.image2url.com/r2/default/files/1779007047123-8e18f6a6-8943-4dce-8714-5313f813033e.mp3"></audio>
+                    <div class="discord-id">ID: 1215302892278251530</div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-- AMAGIRI BABIES SECTION -->
+        <div class="section-heading">AMAGIRI BABIES</div>
+        <div class="grid">
+            <!-- PATH -->
+            <div class="card" onclick="openProfile(this)">
+                <div class="banner"></div>
+                <div class="avatar-container">
+                    <img class="avatar" src="https://images-ext-1.discordapp.net/external/cBMqo2Z0DCn51uhFkKXMP1gJLIDxvjbCAaba5RDRu-g/%3Fsize%3D4096%26ignore%3Dtrue%29./https/cdn.discordapp.com/avatars/455201388004376586/d00fb1aebbe88799d597798d112bebf8.png?format=webp&quality=lossless&width=320&height=320" alt="PATH">
+                </div>
+                <div class="card-content">
+                    <div class="name-row">
+                        <span class="name">PATH</span>
+                        <span class="badge amagiribabies">AMAGIRI BABIES</span>
+                    </div>
+                    <p class="description">bobo ka tol</p>
+                    <audio class="audio-player" controls src="https://www.image2url.com/r2/default/files/1779007076216-48c37c43-9b82-480d-9f5c-bf2c29b463ea.mp3"></audio>
+                    <div class="discord-id">ID: 455201388004376586</div>
+                </div>
+            </div>
+
+            <!-- XIRO -->
+            <div class="card" onclick="openProfile(this)">
+                <div class="banner"></div>
+                <div class="avatar-container">
+                    <img class="avatar" src="https://images-ext-1.discordapp.net/external/ZpFDoQSP1_SnZ0a-7sqEc1AgyGXC76ktIK72pFqrkpE/%3Fsize%3D4096%26ignore%3Dtrue%29./https/cdn.discordapp.com/guilds/1282390073295245465/users/1234208024101388402/avatars/369524400ee9699cdb4b8c6b1bfd3218.png?format=webp&quality=lossless&width=920&height=920" alt="XIRO">
+                </div>
+                <div class="card-content">
+                    <div class="name-row">
+                        <span class="name">XIRO</span>
+                        <span class="badge amagiribabies">AMAGIRI BABIES</span>
+                    </div>
+                    <p class="description">bobo ka tol</p>
+                    <audio class="audio-player" controls src="https://www.image2url.com/r2/default/files/1779007076216-48c37c43-9b82-480d-9f5c-bf2c29b463ea.mp3"></audio>
+                    <div class="discord-id">ID: 1234208024101388402</div>
+                </div>
+            </div>
+
+            <!-- PAO -->
+            <div class="card" onclick="openProfile(this)">
+                <div class="banner"></div>
+                <div class="avatar-container">
+                    <img class="avatar" src="https://images-ext-1.discordapp.net/external/_3wPVZIgsc11pmMgZTVqP2Uemxfm-Vd40ZvysurGm4w/%3Fsize%3D4096%26ignore%3Dtrue%29./https/cdn.discordapp.com/avatars/740555591113506916/3412923d413e95387833d2e35131f7f6.png?format=webp&quality=lossless&width=320&height=320" alt="PAO">
+                </div>
+                <div class="card-content">
+                    <div class="name-row">
+                        <span class="name">PAO</span>
+                        <span class="badge amagiribabies">AMAGIRI BABIES</span>
+                    </div>
+                    <p class="description">bobo ka tol</p>
+                    <audio class="audio-player" controls src="https://www.image2url.com/r2/default/files/1779007076216-48c37c43-9b82-480d-9f5c-bf2c29b463ea.mp3"></audio>
+                    <div class="discord-id">ID: 1422715006331654154</div>
+                </div>
+            </div>
+
+            <!-- MOIRA -->
+            <div class="card" onclick="openProfile(this)">
+                <div class="banner"></div>
+                <div class="avatar-container">
+                    <img class="avatar" src="https://images-ext-1.discordapp.net/external/bUtB9Wq-aojCFrvwT2ZHmkGUJukyybpmJa9tQ0oWYXo/%3Fsize%3D4096%26ignore%3Dtrue%29./https/cdn.discordapp.com/avatars/1343454471442796574/06ebfb7ce63524c56592221766bf7761.png?format=webp&quality=lossless&width=320&height=320" alt="MOIRA">
+                </div>
+                <div class="card-content">
+                    <div class="name-row">
+                        <span class="name">MOIRA</span>
+                        <span class="badge amagiribabies">AMAGIRI BABIES</span>
+                    </div>
+                    <p class="description">bobo ka tol</p>
+                    <audio class="audio-player" controls src="https://www.image2url.com/r2/default/files/1779007076216-48c37c43-9b82-480d-9f5c-bf2c29b463ea.mp3"></audio>
+                    <div class="discord-id">ID: 1343454471442796574</div>
+                </div>
+            </div>
+
+            <!-- NORI -->
+            <div class="card" onclick="openProfile(this)">
+                <div class="banner"></div>
+                <div class="avatar-container">
+                    <img class="avatar" src="https://images-ext-1.discordapp.net/external/y1X3_texVwSvrGt7JXSb73OFKS7-PFkUCqobR9KVXEc/%3Fsize%3D4096%26ignore%3Dtrue%29./https/cdn.discordapp.com/avatars/1241197982955733094/ab082b6617e0a20082cb3e6c5b88318c.png?format=webp&quality=lossless&width=320&height=320" alt="NORI">
+                </div>
+                <div class="card-content">
+                    <div class="name-row">
+                        <span class="name">NORI</span>
+                        <span class="badge amagiribabies">AMAGIRI BABIES</span>
+                    </div>
+                    <p class="description">bobo ka tol</p>
+                    <audio class="audio-player" controls src="https://www.image2url.com/r2/default/files/1779007076216-48c37c43-9b82-480d-9f5c-bf2c29b463ea.mp3"></audio>
+                    <div class="discord-id">ID: 1241197982955733094</div>
+                </div>
+            </div>
+
+            <!-- ZERRA -->
+            <div class="card" onclick="openProfile(this)">
+                <div class="banner"></div>
+                <div class="avatar-container">
+                    <img class="avatar" src="https://images-ext-1.discordapp.net/external/GRsBIx-39wW5OjyoL4GELk-7oBFDNhaw1suJs50Roug/%3Fsize%3D4096%26ignore%3Dtrue%29./https/cdn.discordapp.com/avatars/699455853182451723/015e1c4b788faa64a1b3a04ae9ea6f9b.png?format=webp&quality=lossless&width=320&height=320" alt="ZERRA">
+                </div>
+                <div class="card-content">
+                    <div class="name-row">
+                        <span class="name">ZERRA</span>
+                        <span class="badge amagiribabies">AMAGIRI BABIES</span>
+                    </div>
+                    <p class="description">bobo ka tol</p>
+                    <audio class="audio-player" controls src="https://www.image2url.com/r2/default/files/1779007076216-48c37c43-9b82-480d-9f5c-bf2c29b463ea.mp3"></audio>
+                    <div class="discord-id">ID: 699455853182451723</div>
+                </div>
+            </div>
+
+            <!-- TOFEE -->
+            <div class="card" onclick="openProfile(this)">
+                <div class="banner"></div>
+                <div class="avatar-container">
+                    <img class="avatar" src="https://images-ext-1.discordapp.net/external/y-jjLQRV5BJwEIDqkcq95-UfJtlHjTjcQHJg5976LZI/%3Fsize%3D4096%26ignore%3Dtrue%29./https/cdn.discordapp.com/avatars/860006027897470976/e0c5d6ad00071cee6d3d799f08ece0b6.png?format=webp&quality=lossless&width=320&height=320" alt="TOFEE">
+                </div>
+                <div class="card-content">
+                    <div class="name-row">
+                        <span class="name">TOFEE</span>
+                        <span class="badge amagiribabies">AMAGIRI BABIES</span>
+                    </div>
+                    <p class="description">bobo ka tol</p>
+                    <audio class="audio-player" controls src="https://www.image2url.com/r2/default/files/1779007122081-50acb263-33fe-428a-bf5b-25849d534bbb.mp3"></audio>
+                    <div class="discord-id">ID: 860006027897470976</div>
+            </div>
+        </div>
+    </div>
+
+
+<div id="profileModal" class="profile-modal">
+<div class="close-modal" onclick="closeProfile()">&times;</div>
+
+<div class="profile-box">
+<div class="profile-banner" id="modalBanner"></div>
+
+<div class="profile-content">
+<img id="modalAvatar" class="profile-avatar" src="">
+<h2 id="modalName" class="profile-name"></h2>
+<p id="modalRole" class="profile-role"></p>
+<p id="modalDesc"></p>
+<div id="modalID" class="discord-id" style="margin-top:15px;"></div>
+</div>
+</div>
+</div>
+
+<script>
+function openProfile(card){
+
+const avatar = card.querySelector('.avatar').src;
+const name = card.querySelector('.name').innerText;
+const role = card.querySelector('.badge').innerText;
+const desc = card.querySelector('.description').innerText;
+const discordId = card.querySelector('.discord-id').innerText;
+
+document.getElementById('modalAvatar').src = avatar;
+document.getElementById('modalName').innerText = name;
+document.getElementById('modalRole').innerText = role;
+document.getElementById('modalDesc').innerText = desc;
+document.getElementById('modalID').innerText = discordId;
+
+document.getElementById('modalBanner').style.backgroundImage =
+window.getComputedStyle(card.querySelector('.banner')).backgroundImage;
+
+document.getElementById('profileModal').classList.add('active');
+}
+
+function closeProfile(){
+document.getElementById('profileModal').classList.remove('active');
+}
+
+window.addEventListener('click', function(e){
+const modal = document.getElementById('profileModal');
+if(e.target === modal){
+closeProfile();
+}
+});
+</script>
+
+</body>
+</html>
