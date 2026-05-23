@@ -126,6 +126,8 @@ border-radius:20px;
 overflow:hidden;
 animation:zoomIn .3s;
 box-shadow:0 0 40px rgba(255,0,0,0.2);
+color:white;
+position:relative;
 }
 
 .profile-banner{
@@ -137,6 +139,16 @@ background-position:center;
 .profile-content{
 padding:25px;
 text-align:center;
+}
+
+.profile-content a{
+text-decoration:none;
+font-weight:600;
+transition:.2s;
+}
+
+.profile-content a:hover{
+opacity:.7;
 }
 
 .profile-avatar{
@@ -490,13 +502,90 @@ to{opacity:1;}
         playInteractionSound(sound);
       };
 
-window.openDynamicProfile = (name, role, avatar, desc='AMAGIRI BABIES') => {
+const PROFILE_DATA = {
+LUKE: {
+discord: "@ihatepancitcantonoriginal",
+spotify: "https://open.spotify.com/lukelang",
+bio: "FOUNDING FATHER",
+instagram: "https://instagram.com/yearner.lukie",
+tiktok: "https://tiktok.com/@lukesohnsm"
+},
+
+DAMISH: {
+discord: "@dmshzx",
+spotify: "https://open.spotify.com/",
+bio: "FOUNDING FATHER",
+instagram: "https://instagram.com/",
+tiktok: "https://tiktok.com/@"
+},
+
+ASTRA: {
+discord: "@astra",
+spotify: "https://open.spotify.com/",
+bio: "FOUNDING FATHER",
+instagram: "https://instagram.com/",
+tiktok: "https://tiktok.com/@"
+},
+
+RHYA: {
+discord: "@rhya",
+spotify: "https://open.spotify.com/",
+bio: "FOUNDING FATHER",
+instagram: "https://instagram.com/",
+tiktok: "https://tiktok.com/@"
+},
+
+CHASE: {
+discord: "@chase",
+spotify: "https://open.spotify.com/",
+bio: "FOUNDING FATHER",
+instagram: "https://instagram.com/",
+tiktok: "https://tiktok.com/@"
+}
+};
+
+window.openDynamicProfile = (name, role, avatar, desc='AMAGIRI') => {
+
+const data = PROFILE_DATA[name] || {};
+
 document.getElementById('modalAvatar').src = avatar;
 document.getElementById('modalName').innerText = name;
 document.getElementById('modalRole').innerText = role;
-document.getElementById('modalDesc').innerText = desc;
-document.getElementById('modalID').innerText = '';
+
+document.getElementById('modalDesc').innerHTML = `
+<div style="margin-top:15px;text-align:left;line-height:1.8;">
+
+<div><b>Bio:</b> ${data.bio || desc}</div>
+
+<div><b>Discord:</b> 
+<a href="https://discord.com" target="_blank" style="color:#ff3e3e;">
+${data.discord || 'None'}
+</a>
+</div>
+
+<div><b>Spotify:</b> 
+<a href="${data.spotify || '#'}" target="_blank" style="color:#1DB954;">
+Open Spotify
+</a>
+</div>
+
+<div><b>Instagram:</b> 
+<a href="${data.instagram || '#'}" target="_blank" style="color:#ff3e3e;">
+Profile
+</a>
+</div>
+
+<div><b>TikTok:</b> 
+<a href="${data.tiktok || '#'}" target="_blank" style="color:#ff3e3e;">
+Profile
+</a>
+</div>
+
+</div>
+`;
+
 document.getElementById('modalBanner').style.backgroundImage = `url(${avatar})`;
+
 document.getElementById('profileModal').classList.add('active');
 };
 
@@ -513,8 +602,7 @@ document.getElementById('profileModal').classList.add('active');
 <img id="modalAvatar" class="profile-avatar" src="">
 <h2 id="modalName" class="profile-name"></h2>
 <p id="modalRole" class="profile-role"></p>
-<p id="modalDesc"></p>
-<div id="modalID" class="discord-id" style="margin-top:15px;"></div>
+<div id="modalDesc"></div>
 </div>
 </div>
 </div>
@@ -541,7 +629,8 @@ document.getElementById('profileModal').classList.add('active');
 }
 
 function closeProfile(){
-document.getElementById('profileModal').classList.remove('active');
+  document.getElementById('profileModal').classList.remove('active');
+  stopAllSounds();
 }
 
 window.addEventListener('click', function(e){
@@ -977,6 +1066,210 @@ closeProfile();
                     <p class="description">bobo ka tol</p>
                     <audio class="audio-player" controls src="https://www.image2url.com/r2/default/files/1779007076216-48c37c43-9b82-480d-9f5c-bf2c29b463ea.mp3"></audio>
                     <div class="discord-id">ID: 1234208024101388402</div>
+                </div>
+            </div>
+
+            <!-- HIZO -->
+            <div class="card" onclick="openProfile(this)">
+                <div class="banner"></div>
+                <div class="avatar-container">
+                    <img class="avatar" src="https://images-ext-1.discordapp.net/external/G1drbfsku-ww84RZkW9NDw_-_BpXzKGnKMvn7eQEaUc/%3Fsize%3D4096%26ignore%3Dtrue%29./https/cdn.discordapp.com/avatars/1465390722529366188/c664bd1b2e10566d70875335b9dc192f.png?format=webp&quality=lossless&width=320&height=320" alt="HIZO">
+                </div>
+                <div class="card-content">
+                    <div class="name-row">
+                        <span class="name">HIZO</span>
+                        <span class="badge amagiribabies">AMAGIRI BABIES</span>
+                    </div>
+                    <p class="description">bobo ka tol</p>
+                    <audio class="audio-player" controls src="https://www.image2url.com/r2/default/files/1779007076216-48c37c43-9b82-480d-9f5c-bf2c29b463ea.mp3"></audio>
+                    <div class="discord-id">ID: 1465390722529366188</div>
+                </div>
+            </div>
+
+            <!-- AIEN -->
+            <div class="card" onclick="openProfile(this)">
+                <div class="banner"></div>
+                <div class="avatar-container">
+                    <img class="avatar" src="https://images-ext-1.discordapp.net/external/Zbl4u_W9m8Iu1N4YXCK2ROFU3V-Rn0xxalJ7JBJYiP8/%3Fsize%3D4096%26ignore%3Dtrue%29./https/cdn.discordapp.com/avatars/1364166938372079668/9ce37e7f5e08300553ef5f26f67231f9.png?format=webp&quality=lossless&width=320&height=320" alt="AIEN">
+                </div>
+                <div class="card-content">
+                    <div class="name-row">
+                        <span class="name">AIEN</span>
+                        <span class="badge amagiribabies">AMAGIRI BABIES</span>
+                    </div>
+                    <p class="description">bobo ka tol</p>
+                    <audio class="audio-player" controls src="https://www.image2url.com/r2/default/files/1779007076216-48c37c43-9b82-480d-9f5c-bf2c29b463ea.mp3"></audio>
+                    <div class="discord-id">ID: 1364166938372079668</div>
+                </div>
+            </div>
+
+            <!-- CLEO -->
+            <div class="card" onclick="openProfile(this)">
+                <div class="banner"></div>
+                <div class="avatar-container">
+                    <img class="avatar" src="https://images-ext-1.discordapp.net/external/OBy2S8T4h9qj2tWY4M4iN99LpZ0qFIDYVQhMi5YlFr8/%3Fsize%3D4096%26ignore%3Dtrue%29./https/cdn.discordapp.com/avatars/899806203734016010/c70e5ddcf2d32d4a93c556f9fc6d520c.png?format=webp&quality=lossless&width=499&height=499" alt="CLEO">
+                </div>
+                <div class="card-content">
+                    <div class="name-row">
+                        <span class="name">CLEO</span>
+                        <span class="badge amagiribabies">AMAGIRI BABIES</span>
+                    </div>
+                    <p class="description">bobo ka tol</p>
+                    <audio class="audio-player" controls src="https://www.image2url.com/r2/default/files/1779007076216-48c37c43-9b82-480d-9f5c-bf2c29b463ea.mp3"></audio>
+                    <div class="discord-id">ID: 899806203734016010</div>
+                </div>
+            </div>
+
+            <!-- LICHT -->
+            <div class="card" onclick="openProfile(this)">
+                <div class="banner"></div>
+                <div class="avatar-container">
+                    <img class="avatar" src="https://images-ext-1.discordapp.net/external/NpGSlQZHya5duQgTFGVqQ8Q7lC6p4V6PVGWgk-gZyjk/%3Fsize%3D4096%26ignore%3Dtrue%29./https/cdn.discordapp.com/avatars/959275846726733894/6fe52285cfa2d193a775585bc3651ea0.png?format=webp&quality=lossless&width=320&height=320" alt="LICHT">
+                </div>
+                <div class="card-content">
+                    <div class="name-row">
+                        <span class="name">LICHT</span>
+                        <span class="badge amagiribabies">AMAGIRI BABIES</span>
+                    </div>
+                    <p class="description">bobo ka tol</p>
+                    <audio class="audio-player" controls src="https://www.image2url.com/r2/default/files/1779007076216-48c37c43-9b82-480d-9f5c-bf2c29b463ea.mp3"></audio>
+                    <div class="discord-id">ID: 959275846726733894</div>
+                </div>
+            </div>
+
+            <!-- KAISEL -->
+            <div class="card" onclick="openProfile(this)">
+                <div class="banner"></div>
+                <div class="avatar-container">
+                    <img class="avatar" src="https://images-ext-1.discordapp.net/external/n2siNhCZltx4N9gdedQkIGaq4Twu4RaohbiEaIFi6AI/%3Fsize%3D4096%26ignore%3Dtrue%29./https/cdn.discordapp.com/avatars/930455048465551391/f19fad1340c3e0327ed41ad26b0df5d6.png?format=webp&quality=lossless&width=320&height=320" alt="KAISEL">
+                </div>
+                <div class="card-content">
+                    <div class="name-row">
+                        <span class="name">KAISEL</span>
+                        <span class="badge amagiribabies">AMAGIRI BABIES</span>
+                    </div>
+                    <p class="description">bobo ka tol</p>
+                    <audio class="audio-player" controls src="https://www.image2url.com/r2/default/files/1779007076216-48c37c43-9b82-480d-9f5c-bf2c29b463ea.mp3"></audio>
+                    <div class="discord-id">ID: 930455048465551391</div>
+                </div>
+            </div>
+            
+            <!-- SERU -->
+            <div class="card" onclick="openProfile(this)">
+                <div class="banner"></div>
+                <div class="avatar-container">
+                    <img class="avatar" src="https://images-ext-1.discordapp.net/external/7m1N_ypP8bMJkExKZ0u7XC3xeeruJ1ccvYIIWzeoKy0/%3Fsize%3D4096%26ignore%3Dtrue%29./https/cdn.discordapp.com/avatars/1376075208166740088/dc36d290987ae6e1355dc63f19c22070.png?format=webp&quality=lossless&width=320&height=320" alt="SERU">
+                </div>
+                <div class="card-content">
+                    <div class="name-row">
+                        <span class="name">SERU</span>
+                        <span class="badge amagiribabies">AMAGIRI BABIES</span>
+                    </div>
+                    <p class="description">bobo ka tol</p>
+                    <audio class="audio-player" controls src="https://www.image2url.com/r2/default/files/1779007076216-48c37c43-9b82-480d-9f5c-bf2c29b463ea.mp3"></audio>
+                    <div class="discord-id">ID: 1376075208166740088</div>
+                </div>
+            </div>
+
+            <!-- GARDO -->
+            <div class="card" onclick="openProfile(this)">
+                <div class="banner"></div>
+                <div class="avatar-container">
+                    <img class="avatar" src="https://images-ext-1.discordapp.net/external/DXkemDqpShhpg0KOU83GJ4yP8ThDxHbeCmDGtpTeCQs/%3Fsize%3D4096%26ignore%3Dtrue%29./https/cdn.discordapp.com/avatars/1490865780793938234/c20856f35cd3adf4ceb4fff7a5c6c236.png?format=webp&quality=lossless&width=320&height=320" alt="GARDO">
+                </div>
+                <div class="card-content">
+                    <div class="name-row">
+                        <span class="name">GARDO</span>
+                        <span class="badge amagiribabies">AMAGIRI BABIES</span>
+                    </div>
+                    <p class="description">bobo ka tol</p>
+                    <audio class="audio-player" controls src="https://www.image2url.com/r2/default/files/1779007076216-48c37c43-9b82-480d-9f5c-bf2c29b463ea.mp3"></audio>
+                    <div class="discord-id">ID: 1507527952689004596</div>
+                </div>
+            </div>
+
+            <!-- KRISZA -->
+            <div class="card" onclick="openProfile(this)">
+                <div class="banner"></div>
+                <div class="avatar-container">
+                    <img class="avatar" src="https://images-ext-1.discordapp.net/external/cESk5lMI_PFI2vGMcLzBRY82BmXvRNKZiwWQiykM3h0/%3Fsize%3D4096%26ignore%3Dtrue%29./https/cdn.discordapp.com/avatars/1307345986280095764/437260c147f5fe25f4982651924661c2.png?format=webp&quality=lossless&width=320&height=320" alt="KRISZA">
+                </div>
+                <div class="card-content">
+                    <div class="name-row">
+                        <span class="name">KRISZA</span>
+                        <span class="badge amagiribabies">AMAGIRI BABIES</span>
+                    </div>
+                    <p class="description">bobo ka tol</p>
+                    <audio class="audio-player" controls src="https://www.image2url.com/r2/default/files/1779007076216-48c37c43-9b82-480d-9f5c-bf2c29b463ea.mp3"></audio>
+                    <div class="discord-id">ID: 1507528349193339031</div>
+                </div>
+            </div>
+
+            <!-- HAZME -->
+            <div class="card" onclick="openProfile(this)">
+                <div class="banner"></div>
+                <div class="avatar-container">
+                    <img class="avatar" src="https://images-ext-1.discordapp.net/external/jnN5G9zWtoxe_QNgi7vkQgY6X8OgMo_czezxLeXl1kc/%3Fsize%3D4096%26ignore%3Dtrue%29./https/cdn.discordapp.com/avatars/1417506907421278208/0bfab4e68a65d51291460e9fdf72703a.png?format=webp&quality=lossless&width=320&height=320" alt="HAZME">
+                </div>
+                <div class="card-content">
+                    <div class="name-row">
+                        <span class="name">HAZME</span>
+                        <span class="badge amagiribabies">AMAGIRI BABIES</span>
+                    </div>
+                    <p class="description">bobo ka tol</p>
+                    <audio class="audio-player" controls src="https://www.image2url.com/r2/default/files/1779007076216-48c37c43-9b82-480d-9f5c-bf2c29b463ea.mp3"></audio>
+                    <div class="discord-id">ID: 1417506907421278208</div>
+                </div>
+            </div>
+
+            <!-- IAN -->
+            <div class="card" onclick="openProfile(this)">
+                <div class="banner"></div>
+                <div class="avatar-container">
+                    <img class="avatar" src="https://images-ext-1.discordapp.net/external/V5sVEV_hKhkGnKEOFTOGZIId1A-CiA4QnR1kNw-mGHI/%3Fsize%3D4096%26ignore%3Dtrue%29./https/cdn.discordapp.com/avatars/726372939951243305/48fe0e4376fc206b232d240572c3e746.png?format=webp&quality=lossless&width=320&height=320" alt="IAN">
+                </div>
+                <div class="card-content">
+                    <div class="name-row">
+                        <span class="name">IAN</span>
+                        <span class="badge amagiribabies">AMAGIRI BABIES</span>
+                    </div>
+                    <p class="description">bobo ka tol</p>
+                    <audio class="audio-player" controls src="https://www.image2url.com/r2/default/files/1779007076216-48c37c43-9b82-480d-9f5c-bf2c29b463ea.mp3"></audio>
+                    <div class="discord-id">ID: 1507528865378078808</div>
+                </div>
+            </div>
+
+            <!-- AKBAR -->
+            <div class="card" onclick="openProfile(this)">
+                <div class="banner"></div>
+                <div class="avatar-container">
+                    <img class="avatar" src="https://images-ext-1.discordapp.net/external/o1YdPhwvAZzcGNNck3c3jA4U0E8wjKZwL-V8DIA08qw/%3Fsize%3D4096%26ignore%3Dtrue%29./https/cdn.discordapp.com/avatars/1396727617343848569/488105ff9d60e5cf7815c5ac679f1b67.png?format=webp&quality=lossless&width=320&height=320" alt="AKBAR">
+                </div>
+                <div class="card-content">
+                    <div class="name-row">
+                        <span class="name">AKBAR</span>
+                        <span class="badge amagiribabies">AMAGIRI BABIES</span>
+                    </div>
+                    <p class="description">bobo ka tol</p>
+                    <audio class="audio-player" controls src="https://www.image2url.com/r2/default/files/1779007076216-48c37c43-9b82-480d-9f5c-bf2c29b463ea.mp3"></audio>
+                    <div class="discord-id">ID: 899806203734016010</div>
+                </div>
+            </div>
+
+            <!-- SHION -->
+            <div class="card" onclick="openProfile(this)">
+                <div class="banner"></div>
+                <div class="avatar-container">
+                    <img class="avatar" src="https://images-ext-1.discordapp.net/external/oI97H87xQisjrMOAziVMEj-BzP_2pCXuv0zucgrxz8k/%3Fsize%3D4096%26ignore%3Dtrue%29./https/cdn.discordapp.com/avatars/818356510575820852/ebe997dfd7aa67f16d2e9217b7eb35eb.png?format=webp&quality=lossless&width=320&height=320" alt="SHION">
+                </div>
+                <div class="card-content">
+                    <div class="name-row">
+                        <span class="name">SHION</span>
+                        <span class="badge amagiribabies">AMAGIRI BABIES</span>
+                    </div>
+                    <p class="description">bobo ka tol</p>
+                    <audio class="audio-player" controls src="https://www.image2url.com/r2/default/files/1779007076216-48c37c43-9b82-480d-9f5c-bf2c29b463ea.mp3"></audio>
+                    <div class="discord-id">ID: 818356510575820852</div>
                 </div>
             </div>
 
